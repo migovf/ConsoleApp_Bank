@@ -8,6 +8,7 @@ namespace ConsoleApp_Bank
 {
     public class Account : IAccount
     {
+
         public Guid ID { get; set; }
         public Guid OwnerID { get; }
         public List<ITransaction> Transactions { get; set; }
@@ -18,5 +19,6 @@ namespace ConsoleApp_Bank
             OwnerID = ownerID;
             Transactions = new List<ITransaction>();
         }
+
     }
 }
