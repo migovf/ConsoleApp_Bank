@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp_Bank.Model
+namespace ConsoleApp_Bank
 {
     public class Account : IAccount
     {
