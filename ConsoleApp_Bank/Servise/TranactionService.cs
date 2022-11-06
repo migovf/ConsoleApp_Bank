@@ -37,6 +37,7 @@ namespace ConsoleApp_Bank
         public string GetAllTransactions(Guid ownerID)
         {
             string res = string.Empty;
+            decimal balance = 0;
             foreach (var account in IVirtualRepository.Accounts)
             {
                 if (account.OwnerID == ownerID)
@@ -46,12 +47,14 @@ namespace ConsoleApp_Bank
                         res += $"Id: {transaction.ID}\n" +
                             $"From: {transaction.FromID}\n" +
                             $"To: {transaction.ToID} \n" +
-                            $"Amount: {transaction.Amount}\n";
+                            $"Amount: {transaction.Amount}\n" +
+                            $"{new string('=', 50)}\n";
 
                     }
                 }
 
             }
+            res += $"Total Balance: {GetAmount(ownerID)}";
             
             return res;
         }

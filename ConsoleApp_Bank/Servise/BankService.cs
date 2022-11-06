@@ -9,13 +9,14 @@ namespace ConsoleApp_Bank
     public class BankService : IBankService
     {
 
-        public void CreatePlayer(string name, int age, decimal startAmount)
+        public IPlayer CreatePlayer(string name, int age, decimal startAmount)
         {
             IPlayer player = new Player(name, age);
             IVirtualRepository.Players.Add(player);
 
             IAccount account = new Account(player.PlayerID, startAmount);
             IVirtualRepository.Accounts.Add(account);
+            return player;
         }
 
         public decimal GetMoneyAmount(Guid ownerID)
@@ -42,7 +43,7 @@ namespace ConsoleApp_Bank
             }
         }
 
-        public string GetListTransactions(Guid ownerID)
+        public string GetAllTransactions(Guid ownerID)
         {
             IAccountService accountService = new AccountService();
             return accountService.GetAllTransactions(ownerID);
