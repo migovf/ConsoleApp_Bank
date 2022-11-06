@@ -12,13 +12,8 @@ namespace ConsoleApp_Bank
         static void Main()
         {
 
-            List<ITransaction> transactions = new List<ITransaction>();
-            transactions.Add(new Transaction(Guid.NewGuid(), Guid.NewGuid(), 5000, "Start Amount"));
 
 
-            string result = PrintInfoTransaction(transactions[0]);
-
-            Console.WriteLine(result);
         }
 
         private static string PrintInfoTransaction(ITransaction transaction)

@@ -9,10 +9,10 @@ namespace ConsoleApp_Bank
     public interface IBankService
     {
 
-        bool MoneyTransfer();
-        decimal GetMoneyAmount();
-        bool IsEnoughMoney();
-
-
+        public void CreatePlayer(string name, int age, decimal startAmount);
+        public decimal GetMoneyAmount(Guid ownerID);
+        public bool IsEnoughMoney(Guid ownerID, decimal amountFoTransaction);
+        public void MoneyTransfer(Guid fromID, Guid toID, decimal amount);
+        public string GetListTransactions(Guid ownerID);
     }
 }

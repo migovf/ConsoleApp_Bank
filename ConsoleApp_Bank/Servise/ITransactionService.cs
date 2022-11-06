@@ -8,5 +8,9 @@ namespace ConsoleApp_Bank
 {
     public interface ITransactionService
     {
+        public ITransaction MoneyStart(Guid IDFrom, Guid IDTo, decimal startAmount, string description);
+        public decimal GetAmount(Guid ownerID);
+        public string GetAllTransactions(Guid ownerID);
+
     }
 }
