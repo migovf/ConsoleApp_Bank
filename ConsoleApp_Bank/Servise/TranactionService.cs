@@ -49,17 +49,17 @@ namespace ConsoleApp_Bank
                 {
                     foreach (var transaction in account.Transactions)
                     {
-                        res += $"Id: {transaction.ID}\n";
+                        res += $"TransactionId: {transaction.ID}\n";
                         res += $"From: {IAccSer.GetOwnerName(transaction.FromID)}\n";
                         res += $"To: {IAccSer.GetOwnerName(transaction.ToID)} \n";
-                        res += $"Amount: {transaction.Amount}\n";
+                        res += $"Amount: {transaction.Amount}$ \n";
                         res += $"\n";
 
                     }
                 }
 
             }
-            res += $"Total Balance: {GetAmount(ownerID)}";
+            res += $"Total Balance: {GetAmount(ownerID)}$ ";
             res += $"{new string('=', 50)}\n";
 
 

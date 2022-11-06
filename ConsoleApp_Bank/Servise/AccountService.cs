@@ -10,7 +10,7 @@ namespace ConsoleApp_Bank
     {
         public IAccount CreateAccount(Guid ownerID, decimal startAmount)
         {
-            IAccount account = new Account(ownerID, startAmount);
+            IAccount account = new Account(ownerID);
             IVirtualRepository.Accounts.Add(account);
             return account;
         }
@@ -55,6 +55,18 @@ namespace ConsoleApp_Bank
 
             return name;
         }
+
+        public IAccount? GetAccount(Guid accountID)
+        {
+            IAccount account = null;
+            foreach (var target in IVirtualRepository.Accounts)
+            {
+                if (target.ID == accountID)
+                    account = target;
+            }
+            return account;
+        }
+
 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,17 +12,28 @@ namespace ConsoleApp_Bank
 
         public IPlayer CreateBank(string bankName = "World Bank", int age = 200, decimal BankAmount = 50000000)
         {
-            IPlayer bank = CreatePlayer(bankName, age, BankAmount);
+            IPlayer bank = CreatePlayer(bankName, age);
+            IAccountService accountService = new AccountService();
+
+            var taugetAccount = accountService.GetAccount(bank.AccountID);
+            taugetAccount.Transactions.Add(new Transaction()
+            {
+                ID = Guid.NewGuid(),
+                FromID = Guid.NewGuid(),
+                ToID = bank.PlayerID,
+                Amount = BankAmount
+            });
+
             return bank;
         }
 
 
-        public IPlayer CreatePlayer(string name, int age, decimal startAmount)
+        public IPlayer CreatePlayer(string name, int age)
         {
             IPlayer player = new Player(name, age);
             IVirtualRepository.Players.Add(player);
 
-            IAccount account = new Account(player.PlayerID, startAmount);
+            IAccount account = new Account(player.PlayerID);
             IVirtualRepository.Accounts.Add(account);
             player.AccountID = account.ID;
             return player;
