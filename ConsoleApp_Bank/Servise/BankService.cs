@@ -9,6 +9,13 @@ namespace ConsoleApp_Bank
     public class BankService : IBankService
     {
 
+        public IPlayer CreateBank(string bankName = "World Bank", int age = 200, decimal BankAmount = 50000000)
+        {
+            IPlayer bank = CreatePlayer(bankName, age, BankAmount);
+            return bank;
+        }
+
+
         public IPlayer CreatePlayer(string name, int age, decimal startAmount)
         {
             IPlayer player = new Player(name, age);
@@ -16,6 +23,7 @@ namespace ConsoleApp_Bank
 
             IAccount account = new Account(player.PlayerID, startAmount);
             IVirtualRepository.Accounts.Add(account);
+            player.AccountID = account.ID;
             return player;
         }
 

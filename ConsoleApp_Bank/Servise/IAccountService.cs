@@ -14,6 +14,7 @@ namespace ConsoleApp_Bank
         public string GetAllTransactions(Guid ownerID);
         public decimal GetMoneyAmount(Guid accountID);
         public void MoneyTransfer(Guid fromID, Guid toID, decimal amount);
+        public string GetOwnerName(Guid ownerID);
 
     }
 }

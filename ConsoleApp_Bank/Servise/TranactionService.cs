@@ -38,24 +38,31 @@ namespace ConsoleApp_Bank
         {
             string res = string.Empty;
             decimal balance = 0;
+            IAccountService IAccSer = new AccountService();
+
+            res += $"{new string('=', 50)}\n";
+            res += $"{new string('=', 20)}";
+            res += $"Owner Name: [{IAccSer.GetOwnerName(ownerID)}]\n";
             foreach (var account in IVirtualRepository.Accounts)
             {
                 if (account.OwnerID == ownerID)
                 {
                     foreach (var transaction in account.Transactions)
                     {
-                        res += $"Id: {transaction.ID}\n" +
-                            $"From: {transaction.FromID}\n" +
-                            $"To: {transaction.ToID} \n" +
-                            $"Amount: {transaction.Amount}\n" +
-                            $"{new string('=', 50)}\n";
+                        res += $"Id: {transaction.ID}\n";
+                        res += $"From: {IAccSer.GetOwnerName(transaction.FromID)}\n";
+                        res += $"To: {IAccSer.GetOwnerName(transaction.ToID)} \n";
+                        res += $"Amount: {transaction.Amount}\n";
+                        res += $"\n";
 
                     }
                 }
 
             }
             res += $"Total Balance: {GetAmount(ownerID)}";
-            
+            res += $"{new string('=', 50)}\n";
+
+
             return res;
         }
 

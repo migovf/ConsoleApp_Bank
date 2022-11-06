@@ -8,7 +8,7 @@ namespace ConsoleApp_Bank
 {
     public interface IBankService
     {
-
+        public IPlayer CreateBank(string bankName = "World Bank", int age = 200, decimal BankAmount = 50000000);
         public IPlayer CreatePlayer(string name, int age, decimal startAmount);
         public decimal GetMoneyAmount(Guid ownerID);
         public bool IsEnoughMoney(Guid ownerID, decimal amountFoTransaction);

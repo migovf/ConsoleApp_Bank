@@ -41,6 +41,20 @@ namespace ConsoleApp_Bank
             return transactionService.GetAllTransactions(ownerID);
         }
 
+        public string GetOwnerName(Guid ownerID)
+        {
+            string name = string.Empty;
+            foreach (IPlayer player in IVirtualRepository.Players)
+            {
+                if (player.PlayerID == ownerID)
+                {
+                    name = player.Name;
+                    break;
+                }
+            }
+
+            return name;
+        }
 
     }
 }
