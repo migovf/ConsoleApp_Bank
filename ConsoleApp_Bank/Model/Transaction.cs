@@ -15,7 +15,7 @@ namespace ConsoleApp_Bank
         public string Description { get; set; }
 
         public Transaction() { }
-        public Transaction(Guid from, Guid to, decimal amount, string description = "")
+        public Transaction(Guid from, Guid to, decimal amount, string description = "Empty")
         {
             ID = Guid.NewGuid();
             FromID = from;

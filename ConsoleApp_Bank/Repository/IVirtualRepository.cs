@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp_Bank
 {
-    public class VirtualRepository : IVirtualRepository
+    public interface IVirtualRepository
     {
 
         public static List<IAccount> Accounts { get; set; } = new List<IAccount>();
-        public static List<IPlayer> Players { get; set; } = new List<IPlayer>();  
+        public static List<IPlayer> Players { get; set; } = new List<IPlayer> { };
 
     }
-
 }

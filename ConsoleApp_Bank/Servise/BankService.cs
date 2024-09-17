@@ -1,5 +1,4 @@
-﻿using ConsoleApp_Bank.Servise;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +8,55 @@ namespace ConsoleApp_Bank
 {
     public class BankService : IBankService
     {
-        public decimal GetMoneyAmount()
+
+        public IPlayer CreateBank(string bankName = "World Bank", int age = 200, decimal BankAmount = 50000000)
         {
-            throw new NotImplementedException();
+            IPlayer bank = CreatePlayer(bankName, age, BankAmount);
+            return bank;
         }
 
-        public bool IsEnoughMoney()
+
+        public IPlayer CreatePlayer(string name, int age, decimal startAmount)
         {
-            throw new NotImplementedException();
+            IPlayer player = new Player(name, age);
+            IVirtualRepository.Players.Add(player);
+
+            IAccount account = new Account(player.PlayerID, startAmount);
+            IVirtualRepository.Accounts.Add(account);
+            player.AccountID = account.ID;
+            return player;
         }
 
-        public bool MoneyTransfer()
+        public decimal GetMoneyAmount(Guid ownerID)
         {
-            throw new NotImplementedException();
+            IAccountService accountService = new AccountService();
+            decimal amount = accountService.GetMoneyAmount(ownerID);
+            return amount;
         }
+
+        public bool IsEnoughMoney(Guid ownerID, decimal amountFoTransaction)
+        {
+            if (GetMoneyAmount(ownerID) >= amountFoTransaction)
+                return true;
+            else
+                return false;
+        }
+
+        public void MoneyTransfer(Guid fromID, Guid toID, decimal amount)
+        {
+            if (IsEnoughMoney(fromID, amount))
+            {
+                IAccountService accountService = new AccountService();
+                accountService.MoneyTransfer(fromID, toID, amount);
+            }
+        }
+
+        public string GetAllTransactions(Guid ownerID)
+        {
+            IAccountService accountService = new AccountService();
+            return accountService.GetAllTransactions(ownerID);
+        }
+
+
     }
 }

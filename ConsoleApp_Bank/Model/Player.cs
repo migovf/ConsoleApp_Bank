@@ -14,7 +14,7 @@ namespace ConsoleApp_Bank
         public int Age { get; set; }
         public Guid AccountID { get; set; }
 
-        public Player(string name, int age, decimal startAmount)
+        public Player(string name, int age)
         {
             PlayerID = Guid.NewGuid();
             Name = name;
